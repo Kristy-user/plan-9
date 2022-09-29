@@ -8,7 +8,6 @@ type CheckBoxLangProps = {
 const CheckBoxLang = ({ setLang, currentLang }: CheckBoxLangProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLang(event.target.value);
-    console.log(event.target.value);
   };
 
   return (

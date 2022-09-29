@@ -1,18 +1,14 @@
-import Head from 'next/head';
 import '../styles/globals.css';
+import { BooksProvider } from '../context/BooksContext';
 
 function MyApp({ Component, pageProps }) {
   if (typeof window !== 'undefined') {
     localStorage.setItem('VERSION', process.env.NEXT_PUBLIC_VERSION);
   }
-
   return (
-    <>
-      <Head>
-        <title>Bookshelf</title>
-      </Head>
+    <BooksProvider>
       <Component {...pageProps} />
-    </>
+    </BooksProvider>
   );
 }
 
