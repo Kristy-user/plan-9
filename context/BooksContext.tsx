@@ -19,7 +19,6 @@ const BooksProvider = ({ children }) => {
       .get(`http://gutendex.com/books?languages=en`)
       .then((res) => {
         setBooks(res.data.results);
-        books.forEach((book: Book) => (book.isShowed = false));
       })
       .catch((error) => {
         console.log('error', error);

@@ -6,7 +6,7 @@ import { BooksContext } from '../../context/BooksContext';
 import { Book } from '../../types/interface';
 const format_jpg: string = 'image/jpeg';
 
-function bookItemPage({ bookItem }: { bookItem: Book }) {
+function BookItemPage({ bookItem }: { bookItem: Book }) {
   const { idWatchedBook, setIdWatchedBook } = useContext(BooksContext);
   const router = useRouter();
   const { id, title, formats, authors, download_count, subjects } = bookItem;
@@ -60,4 +60,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default bookItemPage;
+export default BookItemPage;

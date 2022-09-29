@@ -24,7 +24,6 @@ const BookImage = ({ src, id, ...props }: BookImageProps) => {
       {...props}
       onLoadingComplete={onLoadCallback}
       layout="responsive"
-      priority={id}
     />
   );
 };

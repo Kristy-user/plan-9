@@ -7,7 +7,7 @@ const Spinner = () => {
       color="#8683e1"
       width="100"
       visible={true}
-      ariaLabel="falling-lines-loading"
+      // ariaLabel="falling-lines-loading"
     />
   );
 };
