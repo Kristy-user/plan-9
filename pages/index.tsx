@@ -21,7 +21,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`http://gutendex.com/books?languages=${lang}&page=${currentPage}`)
+      .get(`https://gutendex.com/books?languages=${lang}&page=${currentPage}`)
       .then((res) => {
         setBooks([...books, ...res.data.results]);
         setCurrentPage((prev) => prev + 1);
@@ -34,7 +34,7 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://gutendex.com/books?languages=${lang}&page=${currentPage}`)
+      .get(`https://gutendex.com/books?languages=${lang}&page=${currentPage}`)
       .then((res) => {
         setBooks(res.data.results);
         setLoading(false);

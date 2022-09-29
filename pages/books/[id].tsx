@@ -51,7 +51,7 @@ function BookItemPage({ bookItem }: { bookItem: Book }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const res = await fetch(`http://gutendex.com/books/${context.query.id}`);
+  const res = await fetch(`https://gutendex.com/books/${context.query.id}`);
   const bookItem = await res.json();
   return {
     props: {

@@ -16,7 +16,7 @@ const BooksProvider = ({ children }) => {
   }, []);
   useEffect(() => {
     axios
-      .get(`http://gutendex.com/books?languages=en`)
+      .get(`https://gutendex.com/books?languages=en`)
       .then((res) => {
         setBooks(res.data.results);
       })
