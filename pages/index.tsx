@@ -4,22 +4,39 @@ import Spinner from '../Components/Spinner';
 import { Book } from '../types/interface';
 import SearchBox from '../Components/SearchBox';
 import axios from 'axios';
+import CheckBoxLang from '../Components/CheckBoxLang';
 const format_jpg: string = 'image/jpeg';
 
 const Home = () => {
   const [currentContent, setCurrentContent] = useState<Book[] | []>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
+  const [lang, setLang] = useState<string>('en');
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     axios
-      .get(`http://gutendex.com/books/?page=${currentPage}`)
+      .get(`http://gutendex.com/books?languages=${lang}&page=${currentPage}`)
       .then((res) => {
         setCurrentContent([...currentContent, ...res.data.results]);
         setCurrentPage((prev) => prev + 1);
       })
-      .finally(() => setFetching(false));
+      .finally(() => {
+        setFetching(false);
+      });
   }, [fetching]);
+
+  useEffect(() => {
+    setLoading(true);
+    setCurrentContent([]);
+    axios
+      .get(`http://gutendex.com/books?languages=${lang}&page=${currentPage}`)
+      .then((res) => {
+        setCurrentContent(res.data.results);
+        setLoading(false);
+      });
+  }, [lang]);
+
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
     return function () {
@@ -38,12 +55,13 @@ const Home = () => {
 
   return (
     <div className=" md:mx-auto bg-gray-100">
+      <CheckBoxLang setLang={setLang} currentLang={lang} />
       <SearchBox setCurrentContent={setCurrentContent} />
       <div className="sm:p-16 lg:p-32 p-5 object-center max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-5 items-stretch place-content-center">
-          {!currentContent ? (
+          {loading ? (
             <Spinner />
-          ) : currentContent.length < 1 ? (
+          ) : !currentContent || currentContent < 1 ? (
             <p>No results ....</p>
           ) : (
             currentContent.map((character: Book) => {

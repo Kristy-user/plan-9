@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import NextImage from 'next/image';
 
 type BookImageProps = {
-  src: string;
+  src?: string;
   width: string;
   height: string;
 };
@@ -17,7 +17,7 @@ const BookImage = ({ src, ...props }: BookImageProps) => {
     <NextImage
       objectFit="contain"
       src={src}
-      className={`bg-indigo-100 transition duration-1000 ${
+      className={`bg-indigo-100  transition duration-1000 ${
         isReady ? 'blur-0 scale-100' : 'blur-2xl scale-120'
       }`}
       {...props}
