@@ -1,9 +1,19 @@
+import Head from 'next/head';
 import '../styles/globals.css';
-import type { AppProps } from 'next/app';
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
   if (typeof window !== 'undefined') {
     localStorage.setItem('VERSION', process.env.NEXT_PUBLIC_VERSION);
   }
-  return <Component {...pageProps} />;
+
+  return (
+    <>
+      <Head>
+        <title>Bookshelf</title>
+      </Head>
+      <Component {...pageProps} />
+    </>
+  );
 }
+
+export default MyApp;
