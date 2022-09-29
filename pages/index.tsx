@@ -5,6 +5,7 @@ import { Book } from '../types/interface';
 import SearchBox from '../Components/SearchBox';
 import axios from 'axios';
 import CheckBoxLang from '../Components/CheckBoxLang';
+import Link from 'next/link';
 const format_jpg: string = 'image/jpeg';
 
 const Home = () => {
@@ -54,7 +55,7 @@ const Home = () => {
   };
 
   return (
-    <div className=" md:mx-auto bg-gray-100">
+    <div className=" md:mx-auto bg-gray-100 h-full">
       <CheckBoxLang setLang={setLang} currentLang={lang} />
       <SearchBox setCurrentContent={setCurrentContent} />
       <div className="sm:p-16 lg:p-32 p-5 object-center max-w-screen-xl mx-auto">
@@ -64,42 +65,44 @@ const Home = () => {
           ) : !currentContent || currentContent < 1 ? (
             <p>No results ....</p>
           ) : (
-            currentContent.map((character: Book) => {
-              const { id, title, formats, authors, download_count } = character;
+            currentContent.map((item: Book) => {
+              const { id, title, formats, authors, download_count } = item;
               return (
-                <div
-                  key={id}
-                  className="bg-indigo-100 hover:bg-indigo-200 border shadow-xl hover:shadow-inner cursor-pointer rounded-lg p-3 min-h-200 "
-                >
-                  <div className="rounded-t-lg overflow-hidden ">
-                    <BookImage
-                      src={formats[format_jpg]}
-                      width={'100%'}
-                      height={'100%'}
-                    />
-                  </div>
-                  <div className="mx-2 mt-4 w-full ">
-                    <h2 className="font-bold text-xl text-amber-900 text-center">
-                      {title}
-                    </h2>
-                    <p className="text-md text-left font-bold text-gray-600 align">
-                      Authors :
-                      <span className="font-normal">
-                        {authors
-                          .map((author) =>
-                            author.name.split(',').reverse().join(' ')
-                          )
-                          .join(';')}
+                <Link href={`/books/[id]`} as={`/books/${id}`}>
+                  <div
+                    key={id}
+                    className="bg-indigo-100 hover:bg-indigo-200 border shadow-xl hover:shadow-inner cursor-pointer rounded-lg p-3 min-h-200 "
+                  >
+                    <div className="rounded-t-lg overflow-hidden ">
+                      <BookImage
+                        src={formats[format_jpg]}
+                        width={'100%'}
+                        height={'100%'}
+                      />
+                    </div>
+                    <div className="mx-2 mt-4 w-full ">
+                      <h2 className="font-bold text-xl text-amber-900 text-center">
+                        {title}
+                      </h2>
+                      <p className="text-md text-left font-bold text-gray-600 align">
+                        Authors :
+                        <span className="font-normal">
+                          {authors
+                            .map((author) =>
+                              author.name.split(',').reverse().join(' ')
+                            )
+                            .join(';')}
+                        </span>
+                      </p>
+                      <p className="text-md font-bold text-gray-600 inline">
+                        Download count :
+                      </p>{' '}
+                      <span className="font-normal text-gray-600">
+                        {download_count}
                       </span>
-                    </p>
-                    <p className="text-md font-bold text-gray-600 inline">
-                      Download count :
-                    </p>{' '}
-                    <span className="font-normal text-gray-600">
-                      {download_count}
-                    </span>
+                    </div>
                   </div>
-                </div>
+                </Link>
               );
             })
           )}

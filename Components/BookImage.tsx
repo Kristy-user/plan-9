@@ -17,7 +17,7 @@ const BookImage = ({ src, ...props }: BookImageProps) => {
     <NextImage
       objectFit="contain"
       src={src}
-      className={`bg-indigo-100  transition duration-1000 ${
+      className={`bg-inherit transition duration-1000 ${
         isReady ? 'blur-0 scale-100' : 'blur-2xl scale-120'
       }`}
       {...props}

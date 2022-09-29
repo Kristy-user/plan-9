@@ -5,6 +5,7 @@ export interface Book {
   authors: Array<Author>;
   download_count: number;
   languages: Array<string>;
+  subjects: [];
 }
 export interface Author {
   birth_year: number;
