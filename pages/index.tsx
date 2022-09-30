@@ -63,9 +63,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div className=" md:mx-auto bg-gray-100 h-full">
+    <div className="md:mx-auto bg-gray-100 h-full">
+      <div className ="sm:p-16 lg:p-32 p-5 object-center max-w-screen-xl mx-auto"> 
       <CheckBoxLang setLang={setLang} currentLang={lang} />
       <SearchBox setCurrentContent={setBooks} />
+      </div>
       <div className="sm:p-16 lg:p-32 p-5 object-center max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-5 items-stretch place-content-center content-center">
           {loading ? (
