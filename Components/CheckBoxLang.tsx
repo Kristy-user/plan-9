@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 type CheckBoxLangProps = {
   setLang: (value: string) => void;
   currentLang: string;

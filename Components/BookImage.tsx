@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NextImage from 'next/image';
 import imgTemplate from '../public/template.png';
+
 type BookImageProps = {
   src?: string;
   width: string;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ErrorMessage } from './ErrorMesssage';
 import axios from 'axios';
+
 const SearchBox = ({ setCurrentContent }) => {
   const [keyword, setKeyword] = useState<string | undefined>('');
   const [loading, setLoading] = useState<boolean>(false);

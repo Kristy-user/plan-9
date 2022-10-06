@@ -1,12 +1,8 @@
-import axios from 'axios';
-import { createContext, useContext, useEffect, useState } from 'react';
-import { Book } from '../types/interface';
+import { createContext, useEffect, useState } from 'react';
 
 const BooksContext = createContext(undefined);
 
-const BooksProvider = ({ children }) => {
-  const [books, setBooks] = useState<Book[]>([]);
-
+const BooksProvider = ({ children, booksList }) => {
   const [idWatchedBook, setIdWatchedBook] = useState<number[]>([]);
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -14,21 +10,10 @@ const BooksProvider = ({ children }) => {
       idStorage ? setIdWatchedBook(JSON.parse(idStorage)) : null;
     }
   }, []);
-  useEffect(() => {
-    axios
-      .get(`https://gutendex.com/books?languages=en`)
-      .then((res) => {
-        setBooks(res.data.results);
-      })
-      .catch((error) => {
-        console.log('error', error);
-      });
-  }, []);
+
   return (
     <BooksContext.Provider
       value={{
-        books,
-        setBooks,
         idWatchedBook,
         setIdWatchedBook,
       }}
