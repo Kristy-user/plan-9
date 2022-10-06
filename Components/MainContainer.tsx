@@ -2,14 +2,13 @@ import Head from 'next/head';
 import Link from 'next/link';
 
 interface MainContainerProps {
-  keywords?: string;
   title?: string;
   children: React.ReactNode;
 }
 
 const MainContainer: React.FC<MainContainerProps> = ({
   children,
-  keywords,
+
   title,
 }) => {
   return (
@@ -17,7 +16,7 @@ const MainContainer: React.FC<MainContainerProps> = ({
       <Head>
         <meta name="description" content="bookshelf" />
         <meta charSet="utf-8" />
-        <meta keywords={'ulbi tv, nextjs' + keywords}></meta>
+
         <title>{title || 'Bookshelf'}</title>
       </Head>
       <div className="navbar">

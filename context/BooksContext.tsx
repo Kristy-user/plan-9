@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 
 const BooksContext = createContext(undefined);
 
-const BooksProvider = ({ children, booksList }) => {
+const BooksProvider = ({ children }) => {
   const [idWatchedBook, setIdWatchedBook] = useState<number[]>([]);
   useEffect(() => {
     if (typeof window !== 'undefined') {

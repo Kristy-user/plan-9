@@ -6,7 +6,6 @@ import { BooksContext } from '../context/BooksContext';
 import BooksList from '../Components/BookList';
 import MainContainer from '../Components/MainContainer';
 import { GetStaticProps, NextPageContext } from 'next';
-import { Book } from '../types/interface';
 
 const Home = ({ booksList }) => {
   const { idWatchedBook, setIdWatchedBook } = useContext(BooksContext);
