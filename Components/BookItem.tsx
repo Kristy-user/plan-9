@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookImage from './BookImage';
 import Router from 'next/router';
 import { Author } from '../types/interface';
@@ -12,15 +12,20 @@ const BookItem = ({ book }) => {
   function booksId() {
     if (typeof window !== 'undefined') {
       let idStorage = localStorage.getItem('id');
-      return JSON.parse(idStorage);
+      return JSON.parse(idStorage) || [];
     }
   }
+  useEffect(() => {
+    setIdWatchedBook(booksId());
+  }, [id]);
 
   return (
     <div key={id} onClick={() => Router.push(`/books/${id}`)}>
       <div
         className={`bg-indigo-100 hover:bg-indigo-200 border shadow-xl hover:shadow-inner cursor-pointer rounded-lg p-3 min-h-200 ${
-          idWatchedBook.includes(id) ? 'opacity-25' : ''
+          idWatchedBook.length > 0 && idWatchedBook.includes(id)
+            ? 'opacity-25'
+            : ''
         }`}
       >
         <div className="rounded-t-lg overflow-hidden ">

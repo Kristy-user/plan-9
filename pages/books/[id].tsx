@@ -15,15 +15,15 @@ function BookItemPage({ bookItem }: BookItemPageProps) {
   const { id, title, formats, authors, download_count, subjects } = bookItem;
 
   useEffect(() => {
-    let booksId = JSON.parse(localStorage.getItem('id'));
-    console.log(booksId);
+    let booksId = JSON.parse(localStorage.getItem('id')) || [];
+
     if (!booksId.includes(router.query.id)) {
     }
     localStorage.setItem(
       'id',
       JSON.stringify([...booksId, Number(router.query.id)])
     );
-  }, []);
+  }, [id]);
 
   return (
     <MainContainer>
