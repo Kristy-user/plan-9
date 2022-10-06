@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import BookImage from './BookImage';
 import Router from 'next/router';
+import { Author } from '../types/interface';
 
 const format_jpg: string = 'image/jpeg';
 
 const BookItem = ({ book }) => {
-  const [idWatchedBook, setIdWatchedBook] = useState<number[]>([]);
+  const [idWatchedBook, setIdWatchedBook] = useState<number[]>(booksId() || []);
   const { id, title, formats, authors, download_count } = book;
 
-  useEffect(() => {
-    let idStorage = localStorage.getItem('id');
-    setIdWatchedBook(idStorage ? JSON.parse(idStorage) : []);
-  }, []);
+  function booksId() {
+    if (typeof window !== 'undefined') {
+      let idStorage = localStorage.getItem('id');
+      return JSON.parse(idStorage);
+    }
+  }
 
   return (
     <div key={id} onClick={() => Router.push(`/books/${id}`)}>
@@ -36,7 +39,9 @@ const BookItem = ({ book }) => {
             Authors :
             <span className="font-normal">
               {authors
-                .map((author) => author.name.split(',').reverse().join(' '))
+                .map((author: Author) =>
+                  author.name.split(',').reverse().join(' ')
+                )
                 .join(';')}
             </span>
           </p>
