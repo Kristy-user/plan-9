@@ -1,9 +1,8 @@
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import BookImage from '../../Components/BookImage';
 import MainContainer from '../../Components/MainContainer';
-import { BooksContext } from '../../context/BooksContext';
 import { Book } from '../../types/interface';
 const format_jpg: string = 'image/jpeg';
 
@@ -12,18 +11,20 @@ interface BookItemPageProps {
 }
 
 function BookItemPage({ bookItem }: BookItemPageProps) {
-  const { idWatchedBook, setIdWatchedBook } = useContext(BooksContext);
   const router = useRouter();
   const { id, title, formats, authors, download_count, subjects } = bookItem;
 
   useEffect(() => {
-    localStorage.clear();
-    if (!idWatchedBook.includes(router.query.id))
-      setIdWatchedBook([...idWatchedBook, Number(router.query.id)]);
+    let booksId = JSON.parse(localStorage.getItem('id'));
+    console.log(booksId);
+    if (!booksId.includes(router.query.id)) {
+    }
+    localStorage.setItem(
+      'id',
+      JSON.stringify([...booksId, Number(router.query.id)])
+    );
   }, []);
-  useEffect(() => {
-    localStorage.setItem('id', JSON.stringify(idWatchedBook));
-  }, [idWatchedBook]);
+
   return (
     <MainContainer>
       <div className=" bg-gray-100 flex flex-center flex-col justify-center items-center justify-items-center content-center place-content-center pt-10 h-full">

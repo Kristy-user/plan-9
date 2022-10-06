@@ -2,13 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 import SearchBox from '../Components/SearchBox';
 import axios from 'axios';
 import CheckBoxLang from '../Components/CheckBoxLang';
-import { BooksContext } from '../context/BooksContext';
+
 import BooksList from '../Components/BookList';
 import MainContainer from '../Components/MainContainer';
 import { GetStaticProps, NextPageContext } from 'next';
 
 const Home = ({ booksList }) => {
-  const { idWatchedBook, setIdWatchedBook } = useContext(BooksContext);
   const [books, setBooks] = useState(booksList.results);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
@@ -54,11 +53,6 @@ const Home = ({ booksList }) => {
     }
   };
 
-  useEffect(() => {
-    let idStorage = localStorage.getItem('id');
-    setIdWatchedBook(idStorage ? JSON.parse(idStorage) : []);
-  }, []);
-
   return (
     <MainContainer>
       <div className="md:mx-auto bg-gray-100 h-full">
@@ -68,11 +62,7 @@ const Home = ({ booksList }) => {
         </div>
 
         <div className="sm:p-16 lg:p-32 p-5 object-center max-w-screen-xl mx-auto">
-          <BooksList
-            loading={loading}
-            books={books}
-            idWatchedBook={idWatchedBook}
-          />
+          <BooksList loading={loading} books={books} />
         </div>
       </div>
     </MainContainer>

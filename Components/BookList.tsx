@@ -5,14 +5,9 @@ import BookItem from './BookItem';
 interface BooksListProps {
   loading: boolean;
   books: Book[];
-  idWatchedBook: number[];
 }
 
-const BooksList: React.FC<BooksListProps> = ({
-  loading,
-  books,
-  idWatchedBook,
-}) => {
+const BooksList: React.FC<BooksListProps> = ({ loading, books }) => {
   return (
     <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4  gap-5 items-stretch place-content-center content-center">
       {loading ? (
@@ -21,9 +16,7 @@ const BooksList: React.FC<BooksListProps> = ({
         <p>No results ....</p>
       ) : books ? (
         books.map((item: Book) => {
-          return (
-            <BookItem key={item.id} book={item} idWatchedBook={idWatchedBook} />
-          );
+          return <BookItem key={item.id} book={item} />;
         })
       ) : null}
     </div>

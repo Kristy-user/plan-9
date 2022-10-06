@@ -1,9 +1,17 @@
+import { useEffect, useState } from 'react';
 import BookImage from './BookImage';
 import Router from 'next/router';
+
 const format_jpg: string = 'image/jpeg';
 
-const BookItem = ({ book, idWatchedBook }) => {
+const BookItem = ({ book }) => {
+  const [idWatchedBook, setIdWatchedBook] = useState<number[]>([]);
   const { id, title, formats, authors, download_count } = book;
+
+  useEffect(() => {
+    let idStorage = localStorage.getItem('id');
+    setIdWatchedBook(idStorage ? JSON.parse(idStorage) : []);
+  }, []);
 
   return (
     <div key={id} onClick={() => Router.push(`/books/${id}`)}>

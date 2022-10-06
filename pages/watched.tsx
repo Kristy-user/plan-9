@@ -1,9 +1,8 @@
 import { GetStaticProps, NextPageContext } from 'next';
-import { useContext } from 'react';
+import { useEffect, useState } from 'react';
 import BookImage from '../Components/BookImage';
 import MainContainer from '../Components/MainContainer';
 
-import { BooksContext } from '../context/BooksContext';
 import { Book } from '../types/interface';
 
 const format_jpg: string = 'image/jpeg';
@@ -15,7 +14,12 @@ interface WatchedBooksProps {
 }
 
 const WatchedBooks: React.FC<WatchedBooksProps> = ({ booksList }) => {
-  const { idWatchedBook } = useContext(BooksContext);
+  const [idWatchedBook, setIdWatchedBook] = useState<number[]>([]);
+
+  useEffect(() => {
+    let idStorage = localStorage.getItem('id');
+    setIdWatchedBook(idStorage ? JSON.parse(idStorage) : []);
+  }, []);
 
   return (
     <MainContainer title={'Watched books'}>
